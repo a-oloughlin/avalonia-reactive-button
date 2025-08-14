@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:AvaloniaUIComponents.Controls">
+
+  <Design.PreviewWith>
+    <StackPanel Width="400" Spacing="10">      
+        <StackPanel Background="{DynamicResource SystemRegionBrush}">
+          <controls:LoadingIndicator />
+        </StackPanel>
+    </StackPanel>
+  </Design.PreviewWith>
+ 
+  <ControlTheme x:Key="{x:Type controls:LoadingIndicator}" TargetType="controls:LoadingIndicator">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Canvas Width="40" Height="40">
+          <Ellipse
+            Width="32"
+            Height="32"
+            Canvas.Left="4"
+            Canvas.Top="4"
+            Stroke="{DynamicResource SystemAccentColor}"
+            StrokeThickness="4"
+            StrokeDashArray="12,4">
+          </Ellipse>
+        </Canvas>
+      </ControlTemplate>
+    </Setter>
+    <ControlTheme.Animations>
+      <Animation IterationCount="INFINITE" Duration="0:0:1">
+        <KeyFrame Cue="0%">
+          <Setter Property="RotateTransform.Angle" Value="0.0"/>
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="360.0"/>
+        </KeyFrame>
+      </Animation>
+    </ControlTheme.Animations>
+  </ControlTheme>
+</ResourceDictionary>
