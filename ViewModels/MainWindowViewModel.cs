@@ -1,6 +1,7 @@
 ﻿namespace AvaloniaUIComponents.ViewModels
 {
     using System.Threading;
+    using System.Threading.Tasks;
     using ReactiveUI.SourceGenerators;
 
     public partial class MainWindowViewModel : ViewModelBase
@@ -8,9 +9,9 @@
         public string Greeting { get; } = "Welcome to Avalonia!";
 
         [ReactiveCommand]
-        private void OnButtonClick()
+        private async Task OnButtonClickAsync()
         {
-            Thread.Sleep(2000); 
+            await Task.Delay(2000);
         }
     }
 }

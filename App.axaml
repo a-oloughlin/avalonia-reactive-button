@@ -6,5 +6,15 @@
   
     <Application.Styles>
         <FluentTheme />
+      <Styles>
+      <Styles.Resources>
+        <ResourceDictionary>
+          <ResourceDictionary.MergedDictionaries>
+            <MergeResourceInclude Source="avares://AvaloniaUIComponents/Controls/LoadingIndicator.axaml"/>
+            <MergeResourceInclude Source="avares://AvaloniaUIComponents/Controls/ReactiveButton.axaml"/>
+          </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+      </Styles.Resources>
+      </Styles>
     </Application.Styles>
 </Application>

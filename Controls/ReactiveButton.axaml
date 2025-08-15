@@ -1,6 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:AvaloniaUIComponents.Controls">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!--
     Additional resources 
@@ -9,16 +8,16 @@
     Using Theme Variants:
          https://docs.avaloniaui.net/docs/guides/styles-and-resources/how-to-use-theme-variants
   -->
-  
+
   <Design.PreviewWith>
-    <StackPanel Width="400" Spacing="10">      
-        <StackPanel Background="{DynamicResource SystemRegionBrush}">
-          <controls:ReactiveButton />
-        </StackPanel>
+    <StackPanel Width="400" Spacing="10">
+      <StackPanel Background="{DynamicResource SystemRegionBrush}">
+        <ReactiveButton  Content="TestButton" BorderThickness="1" BorderBrush="Black"/>
+      </StackPanel>
     </StackPanel>
   </Design.PreviewWith>
- 
-  <ControlTheme x:Key="{x:Type controls:ReactiveButton}" TargetType="controls:ReactiveButton">
+
+  <ControlTheme x:Key="{x:Type ReactiveButton}" TargetType="ReactiveButton">
     <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="Cursor" Value="Hand"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -26,13 +25,41 @@
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="IsExecuting" Value="{Binding $self.ReactiveCommand.IsExecuting^}"/>
     <Setter Property="Padding" Value="5"/>
+    <Setter Property="FontSize" Value="20"/>
+    <Setter Property="CornerRadius" Value="5"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                Padding="{TemplateBinding Padding}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <Grid>
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                              IsVisible="true"
+                              FontSize="{TemplateBinding FontSize}"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <LoadingIndicator x:Name="PART_LoadingIndicator"
+                              IsVisible="False"
+                              Height="{Binding $parent.Bounds.Height}"
+                              Width="{Binding $parent.Bounds.Width}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    
     <Style Selector="^:executing">
-      <Setter Property="Content">
-        <Template>
-        <controls:LoadingIndicator/>
-        </Template>
-      </Setter>
+      <Setter Property="IsEnabled" Value="False"/>
+      <Style Selector="^/template/LoadingIndicator#PART_LoadingIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^/template/ContentPresenter#PART_ContentPresenter">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
     </Style>
   </ControlTheme>
-  
+
 </ResourceDictionary>

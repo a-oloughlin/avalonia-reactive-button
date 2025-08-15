@@ -36,7 +36,7 @@ public class ReactiveButton : Button
     public bool IsExecuting
     {
         get => this.GetValue(IsExecutingProperty);
-        set => SetValue(IsExecutingProperty, value);
+        private set => SetValue(IsExecutingProperty, value);
     }
 
     static ReactiveButton()
